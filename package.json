@@ -1,0 +1,20 @@
+{
+  "name": "loja-informatica",
+  "version": "1.0.0",
+  "description": "Sistema de venda de equipamentos de informática com cesta de compras",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ecommerce", "loja", "informatica"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
+  }
+}
+

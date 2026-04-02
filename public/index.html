@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Informática - Equipamentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="brand-title">Loja de Informática</h1>
+            <nav>
+                <a href="sobre.html" class="nav-link">Sobre</a>
+                <a href="contato.html" class="nav-link">Contato</a>
+                <button type="button" class="btn-carrinho" onclick="toggleCarrinho()">
+                    Carrinho <span id="carrinho-count">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filtros">
+            <h2>Nossos Produtos</h2>
+            <select id="filtro-categoria" onchange="filtrarProdutos()">
+                <option value="">Todas as categorias</option>
+                <option value="Notebooks">Notebooks</option>
+                <option value="Periféricos">Periféricos</option>
+                <option value="Monitores">Monitores</option>
+                <option value="Armazenamento">Armazenamento</option>
+                <option value="Componentes">Componentes</option>
+                <option value="Áudio">Áudio</option>
+            </select>
+        </section>
+
+        <section id="produtos-container" class="produtos-grid">
+            <!-- Produtos serão carregados aqui -->
+        </section>
+    </main>
+
+    <!-- Modal do Carrinho -->
+    <div id="carrinho-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Carrinho</h2>
+                <span class="close" onclick="toggleCarrinho()">&times;</span>
+            </div>
+            <div id="carrinho-itens" class="carrinho-itens">
+                <!-- Itens do carrinho serão carregados aqui -->
+            </div>
+            <div class="carrinho-footer">
+                <div class="carrinho-total">
+                    <strong>Total: R$ <span id="carrinho-total">0,00</span></strong>
+                </div>
+                <button class="btn-finalizar" onclick="abrirCheckout()" disabled>
+                    Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <span class="close" onclick="fecharCheckout()">&times;</span>
+            </div>
+            <div class="checkout-body">
+                <div class="resumo-pedido">
+                    <h3>Resumo do Pedido</h3>
+                    <div id="checkout-itens"></div>
+                    <div class="checkout-total">
+                        <strong>Total: R$ <span id="checkout-total">0,00</span></strong>
+                    </div>
+                </div>
+                <div class="metodo-pagamento">
+                    <h3>Método de Pagamento</h3>
+                    <div class="pagamento-opcoes">
+                        <label class="radio-option">
+                            <input type="radio" name="metodo" value="pix" checked onchange="alterarMetodoPagamento('pix')">
+                            <span>PIX</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="metodo" value="credito" onchange="alterarMetodoPagamento('credito')">
+                            <span>Cartão de crédito</span>
+                        </label>
+                    </div>
+                    <div id="form-pagamento">
+                        <!-- Formulário de pagamento será carregado aqui -->
+                    </div>
+                    <button class="btn-confirmar" onclick="confirmarPedido()">
+                        Confirmar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div id="sucesso-modal" class="modal">
+        <div class="modal-content sucesso-content">
+            <div class="sucesso-icon" aria-hidden="true">OK</div>
+            <h2>Pedido confirmado</h2>
+            <p id="sucesso-mensagem"></p>
+            <button class="btn-confirmar" onclick="fecharSucesso()">Fechar</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

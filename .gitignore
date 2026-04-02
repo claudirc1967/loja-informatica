@@ -1,0 +1,9 @@
+node_modules/
+data/carrinho.json
+data/pedidos.json
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+
