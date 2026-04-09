@@ -48,7 +48,7 @@ function renderizarProduto(produto) {
                     <span><strong>Estoque:</strong> ${produto.estoque ?? '-'}</span>
                 </div>
                 <div class="produto-detalhe-footer">
-                    <div class="produto-preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</div>
+                    <div class="produto-preco">${formatarMoedaBRL(produto.preco)}</div>
                     <a href="index.html" class="btn-secundario">Voltar</a>
                 </div>
             </div>

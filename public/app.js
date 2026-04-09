@@ -49,7 +49,7 @@ function renderizarProdutos() {
                     <div class="produto-nome">${produto.nome}</div>
                 </a>
                 <div class="produto-descricao">${produto.descricao}</div>
-                <div class="produto-preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</div>
+                <div class="produto-preco">${formatarMoedaBRL(produto.preco)}</div>
                 <a class="btn-detalhes" href="produto.html?id=${produto.id}">
                     Ver detalhes
                 </a>
@@ -143,13 +143,13 @@ function renderizarCarrinho() {
 
     if (carrinho.itens.length === 0) {
         container.innerHTML = '<p class="msg-empty">Carrinho vazio</p>';
-        totalElement.textContent = '0,00';
+        totalElement.textContent = formatarValorBR(0);
         btnFinalizar.disabled = true;
         return;
     }
 
     btnFinalizar.disabled = false;
-    totalElement.textContent = carrinho.total.toFixed(2).replace('.', ',');
+    totalElement.textContent = formatarValorBR(carrinho.total);
 
     container.innerHTML = carrinho.itens.map(item => `
         <div class="carrinho-item">
@@ -161,7 +161,7 @@ function renderizarCarrinho() {
             </div>
             <div class="carrinho-item-info">
                 <div class="carrinho-item-nome">${item.nome}</div>
-                <div class="carrinho-item-preco">R$ ${item.preco.toFixed(2).replace('.', ',')}</div>
+                <div class="carrinho-item-preco">${formatarMoedaBRL(item.preco)}</div>
                 <div class="carrinho-item-controles">
                     <button class="btn-quantidade" onclick="atualizarQuantidade('${item.produtoId}', ${item.quantidade - 1})">-</button>
                     <input type="number" class="quantidade-input" value="${item.quantidade}" min="1" 
@@ -211,11 +211,11 @@ function abrirCheckout() {
     checkoutItens.innerHTML = carrinho.itens.map(item => `
         <div class="checkout-item">
             <span>${item.nome} x${item.quantidade}</span>
-            <span>R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</span>
+            <span>${formatarMoedaBRL(item.preco * item.quantidade)}</span>
         </div>
     `).join('');
 
-    checkoutTotal.textContent = carrinho.total.toFixed(2).replace('.', ',');
+    checkoutTotal.textContent = formatarValorBR(carrinho.total);
 
     alterarMetodoPagamento('pix');
     
