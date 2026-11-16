@@ -69,16 +69,16 @@ sequenceDiagram
     participant REP as MovimentoPenaRepositoryImpl
     participant DB as Oracle
     Tela->>HTTP: PEC, pena, pn, ps, orderBy local
-    HTTP->>REST: GET /movimentacoes?...&pn&ps&sort
-    Note over HTTP,REST: Cliente envia sort; controlador lê order
-    REST->>EJB: PageRequest (pn, ps, Sort)
-    EJB->>REP: recuperarMovimento(cod, pena, pageRequest)
-    REP->>DB: Criteria JPA em MOVIMENTO_PENA + especialização VEC
+    HTTP->>REST: GET /movimentacoes com pn, ps e sort
+    Note over HTTP,REST: Cliente envia sort — controlador lê order
+    REST->>EJB: PageRequest com pn, ps e Sort
+    EJB->>REP: recuperarMovimento
+    REP->>DB: Criteria JPA em MOVIMENTO_PENA
     DB-->>REP: Página de MovimentoPena
     REP-->>EJB: Page
     EJB-->>REST: Page formatada ou MovimentoException
     REST-->>HTTP: JSON envelopado
-    HTTP-->>Tela: content + totalResults
+    HTTP-->>Tela: content e totalResults
 ```
 
 ## 🔌 Contrato e paginação
